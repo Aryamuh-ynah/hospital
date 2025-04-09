@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register - HospitalCare+</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white font-sans">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-600">HospitalCare+</h1>
+      <nav class="space-x-6">
+        <a href="index.html" class="hover:text-blue-500">Home</a>
+        <a href="register.html" class="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300">Register</a>
+        <a href="login.html" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="flex min-h-screen">
+    <!-- Left Side: Text/Image -->
+    <div class="lg:w-1/2 flex flex-col justify-center p-12 bg-gradient-to-r from-blue-50 to-blue-100">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">We help people to<br/>get appointment<br/>online</h1>
+      <p class="text-gray-700 mb-6 max-w-md">
+        Our hospital provides smart digital tools for patient care. Book appointments, access records, and connect with professionals from anywhere.
+      </p>
+      <img src="..\img\bnr.png" alt="Doctor Illustration" class="w-2/3 mt-auto hidden md:block">
+    </div>
+
+    <!-- Right Side: Form Section -->
+    <div class="lg:w-1/2 p-8 lg:p-16 bg-white shadow-md rounded-lg">
+      <h2 class="text-3xl font-semibold text-gray-800 mb-2">Sign Up</h2>
+      <p class="text-sm text-gray-500 mb-6">Please sign up to continue</p>
+
+      <!-- Role Selection -->
+      <div class="flex mb-6 space-x-4">
+        <button id="patientBtn" class="px-4 py-2 rounded-full bg-gray-300 text-gray-700 hover:bg-gray-400 w-full">Patient</button>
+        <button id="doctorBtn" class="px-4 py-2 rounded-full bg-gray-300 text-gray-700 hover:bg-gray-400 w-full">Doctor</button>
+      </div>
+
+      <!-- Patient Form (Default) -->
+      <form id="patientForm" class="space-y-4">
+        <!-- Patient form fields -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" placeholder="First Name" required class="p-3 border border-gray-300 rounded w-full"/>
+          <input type="text" placeholder="Last Name" required class="p-3 border border-gray-300 rounded w-full"/>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="email" placeholder="Email" required class="p-3 border border-gray-300 rounded w-full"/>
+          <input type="text" placeholder="Mobile Number" required class="p-3 border border-gray-300 rounded w-full"/>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="date" placeholder="Date of Birth" required class="p-3 border border-gray-300 rounded w-full"/>
+          <input type="text" placeholder="Address" required class="p-3 border border-gray-300 rounded w-full"/>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <select required class="p-3 border border-gray-300 rounded w-full">
+            <option value="" disabled selected>Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+          <input type="password" placeholder="Password" required class="p-3 border border-gray-300 rounded w-full"/>
+        </div>
+        <input type="password" placeholder="Confirm Password" required class="p-3 border border-gray-300 rounded w-full"/>
+
+        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">Register</button>
+      </form>
+
+      <!-- Doctor Form (Hidden by default) -->
+      <form id="doctorForm" class="space-y-4 hidden">
+        <!-- Doctor-specific form fields -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" placeholder="First Name" required class="p-3 border border-gray-300 rounded w-full"/>
+          <input type="text" placeholder="Last Name" required class="p-3 border border-gray-300 rounded w-full"/>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="email" placeholder="Email" required class="p-3 border border-gray-300 rounded w-full"/>
+          <input type="text" placeholder="Mobile Number" required class="p-3 border border-gray-300 rounded w-full"/>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="date" placeholder="Date of Birth" required class="p-3 border border-gray-300 rounded w-full"/>
+          <input type="text" placeholder="Address" required class="p-3 border border-gray-300 rounded w-full"/>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <select required class="p-3 border border-gray-300 rounded w-full">
+            <option value="" disabled selected>Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+          <select required class="p-3 border border-gray-300 rounded w-full">
+            <option value="" disabled selected>Select Specialization</option>
+            <option value="Cardiology">Cardiology</option>
+            <option value="Neurology">Neurology</option>
+            <option value="Orthopedics">Orthopedics</option>
+            <option value="Pediatrics">Pediatrics</option>
+            <option value="General Surgery">General Surgery</option>
+            <option value="Dermatology">Dermatology</option>
+            <option value="Radiology">Radiology</option>
+            <option value="Dentistry">Dentistry</option>
+            <option value="Psychiatry">Psychiatry</option>
+            <option value="Gynecology">Gynecology</option>
+            <option value="Anesthesiology">Anesthesiology</option>
+            <!-- Add more specializations as needed -->
+          </select>
+        </div>
+
+          <input type="password" placeholder="Password" required class="p-3 border border-gray-300 rounded w-full"/>
+        <input type="password" placeholder="Confirm Password" required class="p-3 border border-gray-300 rounded w-full"/>
+
+        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-800">Register as Doctor</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript for Form Switching -->
+  <script>
+    const patientBtn = document.getElementById("patientBtn");
+    const doctorBtn = document.getElementById("doctorBtn");
+    const patientForm = document.getElementById("patientForm");
+    const doctorForm = document.getElementById("doctorForm");
+  
+    // Default: Patient form visible, Patient button selected
+    let selectedRole = "Patient";
+    patientBtn.classList.add("bg-green-600", "text-white");  // Highlight Patient button
+    doctorBtn.classList.remove("bg-green-600", "text-white"); // Remove from Doctor button
+    patientForm.classList.remove("hidden");
+    doctorForm.classList.add("hidden");
+  
+    // Show Patient form and hide Doctor form
+    patientBtn.addEventListener("click", () => {
+      selectedRole = "Patient";
+      patientBtn.classList.add("bg-green-600", "text-white"); // Patient button highlighted
+      doctorBtn.classList.remove("bg-green-600", "text-white"); // Reset Doctor button
+      patientForm.classList.remove("hidden");
+      doctorForm.classList.add("hidden");
+    });
+  
+    // Show Doctor form and hide Patient form
+    doctorBtn.addEventListener("click", () => {
+      selectedRole = "Doctor";
+      doctorBtn.classList.add("bg-green-600", "text-white"); // Doctor button highlighted
+      patientBtn.classList.remove("bg-green-600", "text-white"); // Reset Patient button
+      doctorForm.classList.remove("hidden");
+      patientForm.classList.add("hidden");
+    });
+    // Form submission with specialization dropdown
+    document.querySelector("form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+    
+      const firstName = document.querySelector('input[placeholder="First Name"]').value;
+      const lastName = document.querySelector('input[placeholder="Last Name"]').value;
+      const email = document.querySelector('input[placeholder="Email"]').value;
+      const phone = document.querySelector('input[placeholder="Mobile Number"]').value;
+      const dob = document.querySelector('input[type="date"]').value;
+      const address = document.querySelector('input[placeholder="Address"]').value;
+      const gender = document.querySelector('select').value;
+      const password = document.querySelector('input[placeholder="Password"]').value;
+      const confirmPassword = document.querySelector('input[placeholder="Confirm Password"]').value;
+      const role = document.querySelector('.bg-green-600')?.innerText || "Patient"; // Default to Patient
+    
+      // Check if passwords match
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+    
+      const data = {
+        firstName,
+        lastName,
+        email,
+        phone,
+        dob,
+        address,
+        gender,
+        password,
+        confirmPassword,
+        role,
+      };
+    
+      // Send data as JSON
+      try {
+        const res = await fetch("http://localhost:5000/api/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",  // Ensure headers indicate JSON
+          },
+          body: JSON.stringify(data),  // Send data as JSON
+        });
+    
+        const response = await res.json();
+    
+        if (res.ok) {
+          alert("Registration successful! You can now log in.");
+          window.location.href = "login.html";  // Redirect to login
+        } else {
+          alert(response.message || "Registration failed.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Server error.");
+      }
+    });
+    
+    
+    
+  </script>
+  
+  
+
+</body>
+</html>

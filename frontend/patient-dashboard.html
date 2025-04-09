@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patient Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Main Dashboard Container -->
+  <div class="flex">
+    <!-- Sidebar -->
+    <div class="w-64 bg-blue-600 text-white h-screen p-4">
+      <h2 class="text-2xl font-bold mb-6">Health</h2>
+      <ul class="space-y-6">
+        <li><a href="#" class="hover:bg-blue-500 px-4 py-2 block rounded">Dashboard</a></li>
+        <li><a href="#" class="hover:bg-blue-500 px-4 py-2 block rounded">Events</a></li>
+        <li><a href="#" class="hover:bg-blue-500 px-4 py-2 block rounded">Appointment</a></li>
+        <li><a href="#" class="hover:bg-blue-500 px-4 py-2 block rounded">Doctors</a></li>
+        <li><a href="#" class="hover:bg-blue-500 px-4 py-2 block rounded">Billing</a></li>
+        <li><a href="#" class="hover:bg-blue-500 px-4 py-2 block rounded">Pharmacy</a></li>
+        <li><a href="#" class="hover:bg-blue-500 px-4 py-2 block rounded">Logout</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-8">
+      <!-- Header Section -->
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-semibold text-gray-800">Hello, <span id="username">Patient</span></h1>
+        <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Logout</button>
+      </div>
+
+      <!-- Health Stats Section -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <!-- Health Stat Boxes -->
+        <div class="bg-white shadow-md p-6 rounded-lg text-center">
+          <h3 class="text-xl font-semibold text-gray-700">Heart Rate</h3>
+          <p class="text-3xl font-bold text-blue-600">230/ml</p>
+          <p class="text-gray-500">Weekly report: 62%</p>
+        </div>
+        <div class="bg-white shadow-md p-6 rounded-lg text-center">
+          <h3 class="text-xl font-semibold text-gray-700">Blood Group</h3>
+          <p class="text-3xl font-bold text-red-600">B +Ve</p>
+        </div>
+        <div class="bg-white shadow-md p-6 rounded-lg text-center">
+          <h3 class="text-xl font-semibold text-gray-700">Weight</h3>
+          <p class="text-3xl font-bold text-green-600">80 kg</p>
+          <p class="text-gray-500">Weekly report: 25%</p>
+        </div>
+        <div class="bg-white shadow-md p-6 rounded-lg text-center">
+          <h3 class="text-xl font-semibold text-gray-700">Height</h3>
+          <p class="text-3xl font-bold text-yellow-600">160 cm</p>
+          <p class="text-gray-500">Weekly report: 40%</p>
+        </div>
+      </div>
+
+      <!-- Calendar and Schedule Section -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Schedules -->
+        <div class="bg-white shadow-md p-6 rounded-lg">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Upcoming Appointments</h2>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <p class="text-lg font-semibold">Dvid King</p>
+              <p class="text-sm text-gray-600">Cardiology - 9:30 AM</p>
+            </div>
+            <div class="flex justify-between items-center">
+              <p class="text-lg font-semibold">Omar Khan</p>
+              <p class="text-sm text-gray-600">Neurology - 10:30 AM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calendar -->
+        <div class="bg-white shadow-md p-6 rounded-lg">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Schedule Calendar</h2>
+          <!-- Add a simple calendar widget (you can use an API or library for an interactive one) -->
+          <div class="flex justify-between mb-4">
+            <span class="text-xl text-gray-800">June 2024</span>
+            <button class="text-blue-500">View full calendar</button>
+          </div>
+          <!-- Simple Calendar Placeholder -->
+          <div class="grid grid-cols-7 gap-1 text-center">
+            <div class="p-2 bg-gray-200">Sun</div>
+            <div class="p-2 bg-gray-200">Mon</div>
+            <div class="p-2 bg-gray-200">Tue</div>
+            <div class="p-2 bg-gray-200">Wed</div>
+            <div class="p-2 bg-gray-200">Thu</div>
+            <div class="p-2 bg-gray-200">Fri</div>
+            <div class="p-2 bg-gray-200">Sat</div>
+            <!-- Days will be added here dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS to Handle Token and Logout -->
+  <script>
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You are not logged in!");
+      window.location.href = "login.html";
+    } else {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const username = payload.email || "Patient"; // Adjust as needed
+      document.getElementById("username").innerText = username;
+    }
+
+    function logout() {
+      localStorage.removeItem("token");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

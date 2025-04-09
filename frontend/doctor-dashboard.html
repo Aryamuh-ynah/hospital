@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor Dashboard</title>
+</head>
+<body>
+  <h1>Welcome, Doctor</h1>
+  <p>Your role is Doctor, and you can access medical records and appointments.</p>
+  <button onclick="logout()">Logout</button>
+
+  <script>
+    // Check if the user is logged in and has a Doctor role
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You are not logged in!");
+      window.location.href = "login.html";  // Redirect to login if not logged in
+    }
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    if (payload.role !== "Doctor") {
+      alert("Unauthorized access!");
+      window.location.href = "login.html";  // Redirect if the role is not Doctor
+    }
+
+    function logout() {
+      localStorage.removeItem("token");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

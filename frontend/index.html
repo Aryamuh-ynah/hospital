@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hospital Management System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-600">HospitalCare+</h1>
+      <nav class="space-x-6">
+        <a href="index.html" class="hover:text-blue-500">Home</a>
+        <a href="#" class="hover:text-blue-500">About</a>
+        <a href="#" class="hover:text-blue-500">Services</a>
+        <a href="#" class="hover:text-blue-500">Contact</a>
+        <a href="register.html" class="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300">Register</a>
+<a href="login.html" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Login</a>
+
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-blue-100 py-20 text-center">
+    <h2 class="text-4xl font-bold text-blue-800 mb-4">Providing Compassionate Care</h2>
+    <p class="text-lg text-blue-700 mb-6">Advanced medical excellence with patient-centered support</p>
+    <a href="#services" class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">Explore Our Services</a>
+
+  </section>
+
+  <!-- About Section -->
+  <section class="py-16 px-4 max-w-5xl mx-auto text-center">
+    <h3 class="text-3xl font-bold text-gray-800 mb-4">About HospitalCare+</h3>
+    <p class="text-gray-600 text-lg">
+      HospitalCare+ is committed to delivering exceptional healthcare through innovation, compassion, and dedication.
+      Our experienced medical team ensures personalized and effective treatment for every patient.
+    </p>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="bg-white py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h3 class="text-3xl font-bold text-center mb-10 text-blue-800">Our Services</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-blue-50 p-6 rounded shadow hover:shadow-lg transition">
+          <h4 class="text-xl font-semibold mb-2">Cardiology</h4>
+          <p class="text-sm text-gray-600">State-of-the-art heart care and treatments.</p>
+        </div>
+        <div class="bg-blue-50 p-6 rounded shadow hover:shadow-lg transition">
+          <h4 class="text-xl font-semibold mb-2">Neurology</h4>
+          <p class="text-sm text-gray-600">Comprehensive neurological services for all ages.</p>
+        </div>
+        <div class="bg-blue-50 p-6 rounded shadow hover:shadow-lg transition">
+          <h4 class="text-xl font-semibold mb-2">Pediatrics</h4>
+          <p class="text-sm text-gray-600">Dedicated child healthcare from infancy through adolescence.</p>
+        </div>
+        <div class="bg-blue-50 p-6 rounded shadow hover:shadow-lg transition">
+          <h4 class="text-xl font-semibold mb-2">Emergency Care</h4>
+          <p class="text-sm text-gray-600">24/7 emergency services with rapid response.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-16 bg-gray-100 text-center">
+    <h3 class="text-3xl font-bold text-gray-800 mb-8">What Our Patients Say</h3>
+    <blockquote class="max-w-xl mx-auto italic text-gray-600">
+      “The care I received at HospitalCare+ was exceptional. The doctors and nurses were very supportive, and the facilities are top-notch.”
+      <br/><span class="font-bold block mt-4">– Sarah M., Patient</span>
+    </blockquote>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="py-16 px-4 bg-white text-center">
+    <h3 class="text-3xl font-bold text-gray-800 mb-4">Get in Touch</h3>
+    <p class="text-gray-600 mb-2">123 Healing Street, Wellness City</p>
+    <p class="text-gray-600 mb-2">Phone: (123) 456-7890</p>
+    <p class="text-gray-600 mb-4">Email: contact@hospitalcareplus.com</p>
+    <a href="#" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">Contact Us</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center py-4">
+    &copy; 2025 HospitalCare+. All rights reserved.
+  </footer>
+  <script>
+    // Smooth scroll to services section
+    document.querySelector('a[href="#services"]').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector('#services').scrollIntoView({ behavior: 'smooth' });
+    });
+  
+    // Optional: Display welcome message if user is logged in (token exists)
+    const token = localStorage.getItem('token');
+    if (token) {
+      const header = document.querySelector("header");
+      const welcomeMsg = document.createElement("span");
+      welcomeMsg.className = "text-sm text-gray-600 mr-4";
+      welcomeMsg.innerText = "Welcome back!";
+      header.querySelector("nav").prepend(welcomeMsg);
+  
+      // Add Logout button
+      const logoutBtn = document.createElement("button");
+      logoutBtn.innerText = "Logout";
+      logoutBtn.className = "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ml-2";
+      logoutBtn.onclick = () => {
+        localStorage.removeItem("token");
+        alert("You’ve been logged out.");
+        window.location.reload();
+      };
+      header.querySelector("nav").appendChild(logoutBtn);
+    }
+  </script>
+  
+</body>
+</html>
