@@ -18,13 +18,13 @@ app.use('/api', require('./routes/auth')); // Register authentication routes
 
 // Test route
 app.get('/', (req, res) => {
-  res.send('API is running...');
+    res.send('API is running...');
 });
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 })
 .then(() => console.log('✅ MongoDB connected'))
 .catch(err => console.error('❌ MongoDB error:', err));

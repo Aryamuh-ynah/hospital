@@ -1,20 +1,21 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');  // Assuming your User model is located here
+const User = require('../models/User');  // Assuming this is where your User model is located
+
 const router = express.Router();
 
 // Registration Route
 router.post('/register', async (req, res) => {
-    const { firstName, lastName, email, phone, dob, address, gender, password, confirmPassword, role } = req.body;
+    const { firstName, lastName, email, phone, dob, address, gender, password, confirmPassword, role, specialization } = req.body;
   
-    // Check if passwords match
+    // Validate that passwords match
     if (password !== confirmPassword) {
       return res.status(400).json({ message: 'Passwords do not match' });
     }
   
     try {
-      // Check if email already exists
+      // Check if the email already exists in the database
       const existingUser = await User.findOne({ email });
       if (existingUser) {
         return res.status(400).json({ message: 'Email already registered' });
@@ -23,7 +24,12 @@ router.post('/register', async (req, res) => {
       // Hash the password
       const hashedPassword = await bcrypt.hash(password, 10);
   
-      // Create new user object
+      // If the user is a doctor, make sure specialization is provided
+      if (role === 'Doctor' && !specialization) {
+        return res.status(400).json({ message: 'Specialization is required for Doctor' });
+      }
+  
+      // Create a new user instance
       const newUser = new User({
         firstName,
         lastName,
@@ -34,62 +40,45 @@ router.post('/register', async (req, res) => {
         gender,
         password: hashedPassword,
         role,
+        specialization: role === 'Doctor' ? specialization : undefined,  // Set specialization only for Doctor
       });
   
-      // Save new user to the database
+      // Save the new user to the database
       await newUser.save();
   
-      res.status(201).json({ message: 'Registration successful!' });  // Success response
+      res.status(201).json({ message: 'Registration successful!' });
     } catch (err) {
-      console.error('Error during registration:', err);  // Log the error for debugging
+      console.error('Error during registration:', err);  // Log the actual error
       res.status(500).json({ message: 'Server error' });
     }
   });
-  
   
 
 // Login Route
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
-  
-    try {
-      // Find the user by email
-      const user = await User.findOne({ email });
-      if (!user) return res.status(400).json({ message: 'Invalid email or password' });
-  
-      // Compare the password with the hashed one stored in the database
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) return res.status(400).json({ message: 'Invalid email or password' });
-  
-      // Check the role if needed (optional)
-      if (user.role !== 'Doctor') {
-        return res.status(400).json({ message: 'You are not authorized as a Doctor' });
-      }
-  
-      // Generate JWT token (including role in payload)
-      const token = jwt.sign(
-        { id: user._id, email: user.email, role: user.role },
-        process.env.JWT_SECRET,
-        { expiresIn: '1h' }
-      );
-  
-      // Send token and user info in the response
-      res.json({
-        message: 'Login successful',
-        token,
-        user: {
-          id: user._id,
-          name: user.firstName + ' ' + user.lastName,
-          email: user.email,
-          role: user.role,
-        }
-      });
-  
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: 'Server error' });
+
+try {
+    const user = await User.findOne({ email });
+    if (!user) {
+        return res.status(400).json({ message: 'Invalid email or password' });
     }
-  });
-  
+
+    // Compare the passwords
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+        return res.status(400).json({ message: 'Invalid email or password' });
+    }
+
+    // Generate JWT
+    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    // Send token and user info
+    res.json({ message: 'Login successful', token, user: { id: user._id, email: user.email } });
+} catch (err) {
+    console.error('Login error:', err);
+    res.status(500).json({ message: 'Server error' });
+}
+});
 
 module.exports = router;
